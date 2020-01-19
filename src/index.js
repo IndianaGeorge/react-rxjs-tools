@@ -2,10 +2,13 @@ import { Component, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { skip } from 'rxjs/operators';
 
-export const useSubject = subject => {
-  const [value, setState] = useState(subject.getValue());
+export const useSubject = (subject,onError,onComplete) => {
+  const [value, setValue] = useState(subject.getValue());
   useEffect(() => {
-    const sub = subject.pipe(skip(1)).subscribe(s => {setState(s)});
+    const subFn = { next: data => setValue(data) };
+    if (onError) { subFn.error = err => onError(err); }
+    if (onComplete) { subFn.complete = () => onComplete(); }
+    const sub = subject.pipe(skip(1)).subscribe(subFn);  
     return () => sub.unsubscribe();
   });
   const newSetState = state => subject.next(state);
@@ -16,12 +19,17 @@ export class Subscription extends Component {
   static propTypes = {
     subject: PropTypes.object.isRequired,
     children: PropTypes.func.isRequired,
+    onError: PropTypes.func,
+    onComplete: PropTypes.func,
   }
 
   constructor(props) {
     super(props);
     this.state = { value: props.subject.value};
-    this.subscription = props.subject.pipe(skip(1)).subscribe(value => this.setState({value: value}));
+    const subFn = { next: value => this.setState({value: value}) };
+    if (props.onError) { subFn.error = err => props.onError(err); }
+    if (props.onComplete) { subFn.complete = () => props.onComplete(); }
+    this.subscription = props.subject.pipe(skip(1)).subscribe(subFn);
   }
 
   render() {
