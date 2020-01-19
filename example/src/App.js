@@ -1,13 +1,19 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react';
+import { BehaviorSubject } from 'rxjs';
 
-import ExampleComponent from 'react-rxjs-tools'
+import Value from './UI/Value';
+import FromClass from './UI/FromClass';
 
-export default class App extends Component {
-  render () {
-    return (
+export default (props) => {
+  const [number$] = useState(new BehaviorSubject(1));
+  return (
+    <div>
       <div>
-        <ExampleComponent text='Modern React component module' />
+        Value via hook: <Value subject={number$} />
       </div>
-    )
-  }
+      <div>
+        Value via class: <FromClass subject={number$} />
+      </div>
+    </div>
+  )
 }
