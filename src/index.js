@@ -15,7 +15,7 @@ export const useSubject = subject => {
 export class Subscription extends Component {
   static propTypes = {
     subject: PropTypes.object.isRequired,
-    render: PropTypes.func.isRequired,
+    children: PropTypes.func.isRequired,
   }
 
   constructor(props) {
@@ -25,7 +25,7 @@ export class Subscription extends Component {
   }
 
   render() {
-    return this.props.render(this.state.value);
+    return this.props.children(this.state.value);
   }
 
   componentWillUnmount() {
