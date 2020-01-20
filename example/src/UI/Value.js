@@ -5,7 +5,7 @@ import {useSubject} from 'react-rxjs-tools'
 export default ({subject})=>{
     const [hasError, setHasError] = useState(false);
     const onError = (err)=>{
-        setHasError(true);
+        //setHasError(true);
         console.log('Value handled error',err);
     };
     const onComplete = ()=>console.log('Value handled completion');
