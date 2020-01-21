@@ -2,6 +2,8 @@
 
 > Tools to facilitate use of RxJS within React.js
 
+[See a working demo](https://indianageorge.github.io/react-rxjs-tools/)
+
 [![NPM](https://img.shields.io/npm/v/react-rxjs-tools.svg)](https://www.npmjs.com/package/react-rxjs-tools)
 
 ## Install
