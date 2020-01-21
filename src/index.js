@@ -10,11 +10,12 @@ export const useSubject = (subject,onError,onComplete) => {
     if (onComplete) { subFn.complete = () => onComplete(); }
     const sub = subject.pipe(skip(1)).subscribe(subFn);  
     return () => sub.unsubscribe();
-  });
+  },[]);
   const newSetState = state => subject.next(state);
   return [value, newSetState];
 };
 
+/*
 export class Subscription extends Component {
   static propTypes = {
     subject: PropTypes.object.isRequired,
