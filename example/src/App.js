@@ -9,10 +9,10 @@ export default (props) => {
   return (
     <div>
       <div>
-        Counter via hook: <FromHook subject={number$} />
+        Counter via useSubject hook: <FromHook subject={number$} />
       </div>
       <div>
-        Counter via class: <FromComponent subject={number$} />
+        Counter via Subscription component: <FromComponent subject={number$} />
       </div>
     </div>
   )
