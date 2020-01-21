@@ -1,18 +1,18 @@
 import React, { useState } from 'react';
 import { BehaviorSubject } from 'rxjs';
 
-import Value from './UI/Value';
-import FromClass from './UI/FromClass';
+import FromHook from './UI/FromHook';
+import FromComponent from './UI/FromComponent';
 
 export default (props) => {
   const [number$] = useState(new BehaviorSubject(1));
   return (
     <div>
       <div>
-        Value via hook: <Value subject={number$} />
+        Counter via hook: <FromHook subject={number$} />
       </div>
       <div>
-        Value via class: <FromClass subject={number$} />
+        Counter via class: <FromComponent subject={number$} />
       </div>
     </div>
   )
